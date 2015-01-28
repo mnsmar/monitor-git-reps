@@ -6,7 +6,9 @@ E_BADARGS=65
 
 if [ $# -lt $EXPECTED_ARGS ]
 then
-  echo "Usage: `basename $0` repos"
+  echo "Usage: monitor-git-reps [DIR]"
+  echo "Checks the provided git repositories for uncommmited changes."
+  echo "Exit status of 1 indicates uncommited changes for some repositories."
   exit $E_BADARGS
 fi
 
