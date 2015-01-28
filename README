@@ -1,0 +1,2 @@
+A bash script that loops on git repositories and reports if there are
+uncommited changes.

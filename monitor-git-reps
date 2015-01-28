@@ -1,0 +1,35 @@
+#!/bin/bash
+
+# Check for proper number of command line args.
+EXPECTED_ARGS=1
+E_BADARGS=65 
+
+if [ $# -lt $EXPECTED_ARGS ]
+then
+  echo "Usage: `basename $0` repos"
+  exit $E_BADARGS
+fi
+
+WORKING_DIR=`pwd`
+REPOS=$@
+
+STATUS=0
+for dir in $REPOS ; do
+	if [ ! -d $dir ]; then
+		continue
+	fi
+
+	if [ -d $dir/.git ] ; then
+		cd $dir
+		if [ -n "$(git status --porcelain)" ]; then 
+			echo "++ - $dir"; 
+			STATUS=1
+		else 
+			echo "OK - $dir";
+		fi
+		cd $WORKING_DIR
+	else
+		echo "$dir - not a git repository"
+	fi
+done
+exit $STATUS
