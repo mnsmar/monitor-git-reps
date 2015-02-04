@@ -18,6 +18,8 @@ REPOS=$@
 STATUS=0
 for dir in $REPOS ; do
 	if [ ! -d $dir ]; then
+		echo "XX - $dir [no such directory]"
+		STATUS=1
 		continue
 	fi
 
@@ -32,6 +34,7 @@ for dir in $REPOS ; do
 		cd $WORKING_DIR
 	else
 		echo "XX - $dir [not a git repository]"
+		STATUS=1
 	fi
 done
 exit $STATUS
